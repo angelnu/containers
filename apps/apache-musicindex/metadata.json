@@ -11,7 +11,8 @@
         "stable": true,
         "tests": {
           "enabled": true,
-          "type": "web"
+          "type": "web",
+          "dgoss_args": "--privileged"
         }
       }
     ]

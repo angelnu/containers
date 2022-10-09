@@ -45,7 +45,7 @@ tasks:
         ./.cue/cue vet --schema '#Spec' ./apps/{{.APP}}/metadata.json metadata.rules.cue
       - task: build
       - >-
-        ./.goss/dgoss run --privileged {{.APP}}:{{.CHANNEL}} {{if eq .BASE "true"}}tail  -f /dev/null{{end}}
+        ./.goss/dgoss run $(jq -r '.channels[] | select(.name=="{{.CHANNEL}}").tests.dgoss_args//""' ./apps/{{.APP}}/metadata.json) {{.APP}}:{{.CHANNEL}} {{if eq .BASE "true"}}tail  -f /dev/null{{end}}
     env:
       CONTAINER_RUNTIME: podman
       GOSS_PATH: ./.goss/goss

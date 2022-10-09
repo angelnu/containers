@@ -11,6 +11,7 @@
 	tests: {
 		enabled: bool
 		type?:   =~"^(cli|web)$"
+		dgoss_args?: string
 	}
 }
 
