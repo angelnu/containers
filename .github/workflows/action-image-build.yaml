@@ -134,10 +134,10 @@ jobs:
             ${{ steps.vars.outputs.chan_label_type }}.created="${{ steps.vars.outputs.chan_build_date }}"
             ${{ steps.vars.outputs.chan_label_type }}.title="${{ matrix.image.app }} (${{ matrix.image.channel }})"
             ${{ steps.vars.outputs.chan_label_type }}.version="${{ steps.vars.outputs.chan_upstream_version }}"
-            ${{ steps.vars.outputs.chan_label_type }}.authors="Bernd Schorgers <me@bjw-s.dev>"
-            ${{ steps.vars.outputs.chan_label_type }}.url="https://github.com/bjw-s/container-images/apps/${{ matrix.image.app }}"
-            ${{ steps.vars.outputs.chan_label_type }}.build.url="https://github.com/bjw-s/container-images/actions/runs/${{ github.run_id }}"
-            ${{ steps.vars.outputs.chan_label_type }}.documentation="https://github.com/bjw-s/container-images/apps/${{ matrix.image.app }}/README.md"
+            ${{ steps.vars.outputs.chan_label_type }}.authors="Angel Nunez Mencias <git@angelnu.com>"
+            ${{ steps.vars.outputs.chan_label_type }}.url="https://github.com/${{ github.repository_owner }}/apps/${{ matrix.image.app }}"
+            ${{ steps.vars.outputs.chan_label_type }}.build.url="https://github.com/${{ github.repository_owner }}/actions/runs/${{ github.run_id }}"
+            ${{ steps.vars.outputs.chan_label_type }}.documentation="https://github.com/${{ github.repository_owner }}/apps/${{ matrix.image.app }}/README.md"
             ${{ steps.vars.outputs.chan_label_type }}.revision="${{ github.sha }}"
 
       - name: Run Goss tests
@@ -151,7 +151,7 @@ jobs:
             --retry-timeout 60s --color --format documentation
           GOSS_SLEEP: 2
         run: >
-          dgoss run ${{ env.IMAGE_REGISTRY_GHCR }}/${{ github.repository_owner }}/${{ steps.vars.outputs.chan_tag_rolling }} ${{ steps.vars.outputs.chan_goss_args }}
+          dgoss run --privileged ${{ env.IMAGE_REGISTRY_GHCR }}/${{ github.repository_owner }}/${{ steps.vars.outputs.chan_tag_rolling }} ${{ steps.vars.outputs.chan_goss_args }}
 
       - name: Push To GHCR
         id: push_to_ghcr
@@ -162,7 +162,7 @@ jobs:
           tags: ${{ steps.build_image.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY_GHCR }}/${{ env.IMAGE_NAMESPACE }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.TOKEN }}
 
       - name: Build successful
         id: build-success

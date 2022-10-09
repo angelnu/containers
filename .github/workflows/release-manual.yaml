@@ -46,7 +46,7 @@ jobs:
           echo "::set-output name=images::${output}"
 
   images-build:
-    uses: bjw-s/container-images/.github/workflows/action-image-build.yaml@main
+    uses: angelnu/containers/.github/workflows/action-image-build.yaml@main
     if: needs.generate-build-matrix.outputs.matrix != '[]'
     needs:
       - generate-build-matrix

@@ -4,9 +4,9 @@ process:
     running: true
 
 port:
-  tcp:80:
+  tcp6:80:
     listening: true
-  tcp:443:
+  tcp6:443:
     listening: true
 
 http:
