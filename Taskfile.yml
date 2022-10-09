@@ -72,7 +72,7 @@ tasks:
   download-cue:
     silent: true
     vars:
-      # renovate: datasource=github-releases depName=aelsabbahy/goss
+      # renovate: datasource=github-releases depName=cue-lang/cue
       GOSS_VERSION: v0.4.3
     cmds:
       - mkdir -p ./.cue
