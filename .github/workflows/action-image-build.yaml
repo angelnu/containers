@@ -141,6 +141,7 @@ jobs:
             ${{ steps.vars.outputs.chan_label_type }}.build.url="https://github.com/${{ github.repository_owner }}/actions/runs/${{ github.run_id }}"
             ${{ steps.vars.outputs.chan_label_type }}.documentation="https://github.com/${{ github.repository_owner }}/apps/${{ matrix.image.app }}/README.md"
             ${{ steps.vars.outputs.chan_label_type }}.revision="${{ github.sha }}"
+            ${{ steps.vars.outputs.chan_label_type }}.source https://github.com/OWNER/REPO
 
       - name: Run Goss tests
         id: dgoss
