@@ -1,37 +1,13 @@
 {
   "extends": [
-    "config:base",
-    "docker:enableMajor",
-    ":disableRateLimiting",
-    ":dependencyDashboard",
-    ":semanticCommits"
+    "github>angelnu/renovate-config",
+    "github>angelnu/renovate-config:automerge-github-actions",
   ],
-  platform: "github",
-  username: "angelnu-bot",
-  gitAuthor: "angelnu-bot <angelnu-bot@users.noreply.github.com>",
-  "repositories": ["angelnu/containers"],
-  "onboarding": false,
-  "requireConfig": false,
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  //"suppressNotifications": ["prIgnoreNotification"],
-  "commitBodyTable": true,
-  "packageRules": [
-    {
-      "description": "Auto-merge Github Actions",
-      "matchDatasources": ["github-tags"],
-      "automerge": true,
-      "automergeType": "branch",
-      "requiredStatusChecks": null,
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchPackagePatterns": ["renovatebot/github-action"]
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["digest"],
-      "commitMessagePrefix": "📣 "
-    }
-  ],
-  "regexManagers": [
+  platform:     "github",
+  username:     "angelnu-bot",
+  gitAuthor:    "angelnu-bot <angelnu-bot@users.noreply.github.com>",
+  repositories: ["angelnu/containers"],
+  regexManagers: [
     {
       "description": "Process Dependencies",
       "fileMatch": [
