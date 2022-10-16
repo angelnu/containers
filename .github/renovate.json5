@@ -4,7 +4,7 @@
     "github>angelnu/renovate-config:automerge-github-actions",
   ],
   platform:     "github",
-  username:     "angelnu-bot",
+  username:     "angelnu-bot[bot]",
   gitAuthor:    "angelnu-bot <angelnu-bot@users.noreply.github.com>",
   repositories: ["angelnu/containers"],
   regexManagers: [
