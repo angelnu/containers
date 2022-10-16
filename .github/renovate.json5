@@ -9,7 +9,7 @@
   platform: "github",
   username: "angelnu-bot",
   gitAuthor: "angelnu-bot <angelnu-bot@users.noreply.github.com>",
-  //"repositories": ["angelnu/containers"],
+  "repositories": ["angelnu/containers"],
   "onboarding": false,
   "requireConfig": false,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
