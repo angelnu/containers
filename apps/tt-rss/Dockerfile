@@ -40,8 +40,8 @@ RUN \
   && git clone https://github.com/HenryQW/mercury_fulltext.git plugins.local/mercury_fulltext \
   && chown -R www-data:www-data cache feed-icons lock \
   && cp -a config.php-dist config.php \
-  && sed -i.bak 's/\(memory_limit =\) 128M/\1 256M/' /etc/php/7.4/fpm/php.ini \
-  && sed -i.bak 's/;clear_env = .*/clear_env = no/i' /etc/php/7.4/fpm/pool.d/www.conf \
+  && sed -i.bak 's/\(memory_limit =\) 128M/\1 256M/' /etc/php/*/fpm/php.ini \
+  && sed -i.bak 's/;clear_env = .*/clear_env = no/i' /etc/php/*/fpm/pool.d/www.conf \
   && echo apt-get remove -y ${EXTRA_INSTALL_ARG} \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get autoremove -y \
