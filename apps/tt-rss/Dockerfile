@@ -38,7 +38,7 @@ RUN \
   && git clone https://git.tt-rss.org/fox/ttrss-nginx-xaccel.git plugins.local/nginx_xaccel \
   && git clone -b $VERSION_LDAP_AUTH https://github.com/angelnu/TTRSS-Auth-LDAP.git plugins.local/auth_ldap \
   && git clone https://github.com/HenryQW/mercury_fulltext.git plugins.local/mercury_fulltext \
-  && chown -R www-data:www-data cache feed-icons lock \
+  && chown -R . .git www-data:www-data cache feed-icons lock \
   && cp -a config.php-dist config.php \
   && sed -i.bak 's/\(memory_limit =\) 128M/\1 256M/' /etc/php/*/fpm/php.ini \
   && sed -i.bak -e 's/;clear_env = .*/clear_env = no/i' -e 's/php8.1-fpm.sock/php-fpm.sock/i' /etc/php/*/fpm/pool.d/www.conf \
