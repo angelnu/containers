@@ -27,7 +27,7 @@ if [ ! -z "${TTRSS_XDEBUG_ENABLED}" ]; then
 	fi
 	echo enabling xdebug with the following parameters:
 	env | grep TTRSS_XDEBUG
-	cat > /etc/php/7.4/conf.d/50_xdebug.ini <<EOF
+	cat > /etc/php/*/conf.d/50_xdebug.ini <<EOF
 zend_extension=xdebug.so
 xdebug.mode=develop,trace,debug
 xdebug.start_with_request = yes
@@ -42,7 +42,7 @@ touch $DST_DIR/.app_is_ready
 
 
 #Start web server with php support
-/usr/sbin/php-fpm7.4
+/usr/sbin/php-fpm*
 /usr/sbin/nginx ${EXTRA_ARGS}
 
 exec sudo -E -u www-data php /app/update_daemon2.php
