@@ -41,7 +41,7 @@ RUN \
   && chown -R www-data:www-data cache feed-icons lock \
   && cp -a config.php-dist config.php \
   && sed -i.bak 's/\(memory_limit =\) 128M/\1 256M/' /etc/php/*/fpm/php.ini \
-  && sed -i.bak 's/;clear_env = .*/clear_env = no/i' /etc/php/*/fpm/pool.d/www.conf \
+  && sed -i.bak -e 's/;clear_env = .*/clear_env = no/i' -e 's/php8.1-fpm.sock/php-fpm.sock/i' /etc/php/*/fpm/pool.d/www.conf \
   && echo apt-get remove -y ${EXTRA_INSTALL_ARG} \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get autoremove -y \
