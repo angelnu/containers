@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM ghcr.io/onedr0p/ubuntu:rolling@sha256:d060e6d1ec250a159995cc174716dfcb7e6cc45b1484c8aacd603bcdbe482d8d
+FROM --platform=$TARGETPLATFORM ghcr.io/onedr0p/ubuntu:rolling@sha256:074499b578e9ee4ef8fdfc44a605fd0c2f45cd04bcc9e9117b7aa6885d7a3d5d
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
