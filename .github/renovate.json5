@@ -5,5 +5,18 @@
   platform:     "github",
   username:     "angelnu-bot[bot]",
   gitAuthor:    "angelnu-bot[bot] <115925344+angelnu-bot[bot]@users.noreply.github.com>",
-  repositories: ["angelnu/containers"]
+  repositories: ["angelnu/containers"],
+  regexManagers: [
+    {
+      "description": "Process Dependencies",
+      "fileMatch": [
+        ".*"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ]
 }
