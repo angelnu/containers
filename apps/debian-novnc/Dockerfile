@@ -24,7 +24,8 @@ RUN apt-get update -y && \
     apt-get install -y --no-install-recommends openbox tigervnc-standalone-server supervisor gosu \
             lxterminal htop pcmanfm firefox-esr && \
     rm -rf /var/lib/apt/lists && \
-    mkdir -p /usr/share/desktop-directories
+    mkdir -p /usr/share/desktop-directories /etc/supervisord.d
+
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY ./apps/debian-novnc/config//menu.xml /etc/xdg/openbox/
