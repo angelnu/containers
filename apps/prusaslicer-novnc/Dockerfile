@@ -16,12 +16,12 @@ RUN apt-get update -y && \
     echo "foo"
 
 WORKDIR /slic3r
-RUN PRUSASLICER_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/version_2.7.1| jq -r '.assets[] | select(.browser_download_url|test("linux-x64-(?!GTK3).+.tar.bz2$"))| .browser_download_url') \
+RUN PRUSASLICER_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/version_${VERSION}| jq -r '.assets[] | select(.browser_download_url|test("linux-x64-(?!GTK3).+.tar.bz2$"))| .browser_download_url') \
   && mkdir -p /slic3r/slic3r-dist \
   && curl -sSL ${PRUSASLICER_URL} | tar -xj -C /slic3r/slic3r-dist --strip-components 1 \
   && deluser www-data \
   && groupadd --gid $SLICER_GID slic3r \
-  && useradd -g slic3r --uid $SLICER_UID --create-home --home-dir /home/slic3r slic3r \
+  && useradd -g slic3r --uid $SLICER_UID --create-home --home-dir /home/slic3r --shell /bin/bash slic3r \
   && mkdir -p /slic3r \
   && mkdir -p /configs \
   && mkdir -p /prints/ \
