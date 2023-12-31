@@ -21,6 +21,7 @@ RUN go mod init build && \
 # Get TigerVNC and Supervisor for isolating the container.
 FROM --platform=$TARGETPLATFORM docker.io/ubuntu:$VERSION
 
+WORKDIR /app
 RUN apt-get update -y && \
     apt-get install -y software-properties-common && \
     LC_ALL=C.UTF-8 add-apt-repository ppa:mozillateam/ppa && \
@@ -41,5 +42,4 @@ EXPOSE 8080
 # VNC Port
 EXPOSE 5900
 
-WORKDIR /
 CMD ["/usr/bin/supervisord"]
