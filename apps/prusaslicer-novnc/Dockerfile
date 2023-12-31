@@ -28,8 +28,8 @@ RUN PRUSASLICER_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSli
   && ln -s /configs/.config/ /home/app/ \
   # We can now set the Download directory for Firefox and other browsers. 
   # We can also add /prints/ to the file explorer bookmarks for easy access.
-  && echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/slic3r/.config/user-dirs.dirs \
-  && echo "file:///prints prints" >> /home/slic3r/.gtk-bookmarks  \
+  && echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/app/.config/user-dirs.dirs \
+  && echo "file:///prints prints" >> /home/app/.gtk-bookmarks  \
   && chown -R 33:33 /app /home/app /prints /configs
 
 COPY ./apps/prusaslicer-novnc/config/prusaslicer.conf /etc/supervisord.d/
