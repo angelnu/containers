@@ -19,6 +19,7 @@ WORKDIR /app
 RUN deluser www-data \
   && groupadd --gid $APP_UID app \
   && useradd -g app --uid $APP_GID --create-home --home-dir /home/app --shell /bin/bash app \
+  && mkdir -p /app \
   && mkdir -p /configs \
   && mkdir -p /prints/ \
   && mkdir /configs/.local \
@@ -28,6 +29,6 @@ RUN deluser www-data \
   # We can also add /prints/ to the file explorer bookmarks for easy access.
   && echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/app/.config/user-dirs.dirs \
   && echo "file:///prints prints" >> /home/app/.gtk-bookmarks  \
-  && chown -R 33:33 /home/app/ /prints/ /configs/
+  && chown -R 33:33 /home/app/ /app /prints/ /configs/
 
 COPY ./apps/kicad-novnc/config/*.conf /etc/supervisord.d/
