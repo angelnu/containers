@@ -39,5 +39,4 @@ EXPOSE 8080
 # VNC Port
 EXPOSE 5900
 
-WORKDIR /
 CMD ["/usr/bin/supervisord"]
