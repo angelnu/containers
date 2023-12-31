@@ -18,6 +18,7 @@ RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/FreeCAD/FreeCAD/rel
   && mkdir -p /app/ \
   && curl -sSL ${DOWNLOAD_URL} > /app/freecad.appimage \
   && chmod 755 /app/freecad.appimage \
+  && cd /app \
   && ./freecad.appimage --appimage-extract \
   && rm freecad.appimage \
   && deluser www-data \
