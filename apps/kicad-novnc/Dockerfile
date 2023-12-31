@@ -4,7 +4,7 @@ ARG CHANNEL
 ARG TARGETARCH
 ARG VERSION
 
-FROM --platform=$TARGETPLATFORM ghcr.io/angelnu/ubuntu-novnc:22.04
+FROM --platform=$TARGETPLATFORM ghcr.io/angelnu/ubuntu-novnc:24.04
 ARG VERSION
 ARG APP_UID=33
 ARG APP_GID=33
