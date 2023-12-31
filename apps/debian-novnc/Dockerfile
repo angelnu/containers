@@ -21,6 +21,7 @@ RUN go mod init build && \
 # Get TigerVNC and Supervisor for isolating the container.
 FROM --platform=$TARGETPLATFORM docker.io/debian:$VERSION
 
+WORKDIR /tmp
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends openbox tigervnc-standalone-server supervisor gosu \
             lxterminal htop pcmanfm firefox-esr && \

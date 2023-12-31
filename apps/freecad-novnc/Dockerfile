@@ -12,10 +12,8 @@ ARG APP_GID=33
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends curl jq openssh-client rsync ca-certificates tar xzip gzip bzip2 zip unzip locales locales-all \
             libglu1-mesa libgtk-3-0 libegl1 libpci3 && \
-    rm -rf /var/lib/apt/lists && \
-    echo "foo"
+    rm -rf /var/lib/apt/lists
 
-WORKDIR /app
 RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/FreeCAD/FreeCAD/releases/tags/${VERSION}| jq -r '.assets[] | select(.browser_download_url|test(".+Linux-x86_64.AppImage$"))| .browser_download_url') \
   && mkdir -p /app/ \
   && curl -sSL ${DOWNLOAD_URL} > /app/freecad.appimage \
