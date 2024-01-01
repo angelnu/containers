@@ -11,9 +11,9 @@ ARG APP_GID=33
 
 RUN apt-get update -y && \
     add-apt-repository ppa:kicad/kicad-7.0-releases && \
-    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install kicad && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y '?and(?exact-name(kicad),?version('$VERSION'))' && \
     rm -rf /var/lib/apt/lists && \
-    echo "foo"
+    dpkg -l kicad # Check the package was indeed installed
 
 RUN deluser www-data \
   && groupadd --gid $APP_UID app \
