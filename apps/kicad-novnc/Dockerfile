@@ -15,7 +15,6 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists && \
     echo "foo"
 
-WORKDIR /app
 RUN deluser www-data \
   && groupadd --gid $APP_UID app \
   && useradd -g app --uid $APP_GID --create-home --home-dir /home/app --shell /bin/bash app \
