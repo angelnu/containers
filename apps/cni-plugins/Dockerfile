@@ -11,4 +11,4 @@ ADD https://github.com/containernetworking/plugins/releases/download/v${VERSION}
 RUN mkdir /plugins && \
       tar -zxvf /*.tgz -C /plugins && \
       rm /*.tgz
-CMD cp /plugins/* /host/opt/cni/bin
+CMD cp -n /plugins/* /host/opt/cni/bin
