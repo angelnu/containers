@@ -108,7 +108,7 @@ jobs:
         uses: e1himself/goss-installation-action@v1.2.1
         with:
           # renovate: datasource=github-releases depName=aelsabbahy/goss
-          version: 0.4.4
+          version: 0.4.7
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
 
