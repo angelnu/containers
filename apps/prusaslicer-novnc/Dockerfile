@@ -14,9 +14,14 @@ RUN apt-get update -y && \
             libglu1-mesa libgtk-3-0 libegl1 && \
     rm -rf /var/lib/apt/lists
 
-RUN PRUSASLICER_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/version_${VERSION}| jq -r '.assets[] | select(.browser_download_url|test("linux-x64-(?!GTK3).+.tar.bz2$"))| .browser_download_url') \
-  && mkdir -p /app \
-  && curl -sSL ${PRUSASLICER_URL} | tar -xj -C /app --strip-components 1 \
+RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/version_${VERSION}| jq -r '.assets[] | select(.browser_download_url|test("Ubuntu-24-04.AppImage$"))| .browser_download_url') \
+  && echo ${DOWNLOAD_URL} \
+  && mkdir -p /app/ \
+  && curl -sSL ${DOWNLOAD_URL} > /app/app.appimage \
+  && chmod 755 /app/app.appimage \
+  && cd /app \
+  && ./app.appimage --appimage-extract \
+  && rm app.appimage \
   && deluser www-data \
   && groupadd --gid $APP_GID app \
   && useradd -g app --uid $APP_UID --create-home --home-dir /home/app --shell /bin/bash app \
