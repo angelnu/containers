@@ -4,14 +4,14 @@ ARG CHANNEL
 ARG TARGETARCH
 ARG VERSION
 
-FROM --platform=$TARGETPLATFORM ghcr.io/angelnu/debian-novnc:12.5@sha256:70bdcd5d281289c22cc64bca1720004bad64183dd82460602b69d0626fb14c32
+FROM --platform=$TARGETPLATFORM ghcr.io/angelnu/ubuntu-novnc:24.04@sha256:4b86b633c77b27962da3de8d694aa2877b09299e6a05847cb86a7a7569938e66
 ARG VERSION
 ARG APP_UID=33
 ARG APP_GID=33
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends curl jq openssh-client rsync ca-certificates tar xzip gzip bzip2 zip unzip locales locales-all \
-            libglu1-mesa libgtk-3-0 libegl1 && \
+            libglu1-mesa libgtk-3-0 libegl1 libwebkit2gtk-4.1-0 && \
     rm -rf /var/lib/apt/lists
 
 RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/version_${VERSION}| jq -r '.assets[] | select(.browser_download_url|test("Ubuntu-24-04.AppImage$"))| .browser_download_url') \
