@@ -42,6 +42,7 @@ touch $DST_DIR/.app_is_ready
 
 echo "Start web server with php support"
 /usr/sbin/php-fpm*
+ln -s /var/run/php/php*-fpm.sock /var/run/php/php-fpm.sock
 /usr/sbin/nginx ${EXTRA_ARGS}
 
 echo "Start update daemon to refresh feeds"
