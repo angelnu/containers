@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#shellcheck disable=SC1091
-source "/shim/umask.sh"
-source "/shim/vpn.sh"
+export HOME=/config
 
 export PGPASSWORD=$TTRSS_DB_PASS
 
@@ -36,13 +34,15 @@ xdebug.client_host = ${TTRSS_XDEBUG_HOST}
 EOF
 fi
 
+echo "Updating schema"
 sudo -E -u www-data php /app/update.php --update-schema=force-yes
 
 touch $DST_DIR/.app_is_ready
 
 
-#Start web server with php support
+echo "Start web server with php support"
 /usr/sbin/php-fpm*
 /usr/sbin/nginx ${EXTRA_ARGS}
 
+echo "Start update daemon to refresh feeds"
 exec sudo -E -u www-data php /app/update_daemon2.php
