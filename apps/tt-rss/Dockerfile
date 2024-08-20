@@ -27,6 +27,7 @@ RUN \
 	  php-zip \
 	  postgresql-client sudo php-xdebug \
     nginx \
+    ca-certificates \
     ${EXTRA_INSTALL_ARG} \
   && git config --global --add safe.directory /app \
   && git clone https://git.tt-rss.org/fox/tt-rss.git . \
