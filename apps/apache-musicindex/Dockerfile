@@ -1,12 +1,10 @@
-FROM --platform=$TARGETPLATFORM ghcr.io/onedr0p/ubuntu:rolling@sha256:b64538c47e648de4aec254f15dd1895605333ae845d1e952f2b28257ee52f183
+FROM --platform=$TARGETPLATFORM ubuntu:rolling@sha256:fad5ba7223f8d87179dfa23211d31845d47e07a474ac31ad5258afb606523c0d
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 ARG VERSION
 ARG CHANNEL
 ARG TARGETARCH
-
-USER root
 
 RUN apt update \
     && apt-get install -y apache2 ssl-cert libapache2-mod-musicindex \
