@@ -14,7 +14,7 @@ RUN apt-get update -y && \
             libglu1-mesa libgtk-3-0 libegl1 libpci3 && \
     rm -rf /var/lib/apt/lists
 
-RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/FreeCAD/FreeCAD/releases/tags/${VERSION}| jq -r '.assets[] | select(.browser_download_url|test(".+Linux-x86_64.AppImage$"))| .browser_download_url') \
+RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/FreeCAD/FreeCAD/releases/tags/${VERSION}| jq -r '.assets[] | select(.browser_download_url|test(".+Linux-x86_64.*.AppImage$"))| .browser_download_url') \
   && mkdir -p /app/ \
   && curl -sSL ${DOWNLOAD_URL} > /app/freecad.appimage \
   && chmod 755 /app/freecad.appimage \
