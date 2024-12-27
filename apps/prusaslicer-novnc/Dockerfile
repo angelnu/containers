@@ -4,25 +4,17 @@ ARG CHANNEL
 ARG TARGETARCH
 ARG VERSION
 
-FROM --platform=$TARGETPLATFORM ghcr.io/angelnu/ubuntu-novnc:24.04@sha256:f9b6e3a3ffbd50f655d447ee7868290362062aa561b1bcb57d0edd0bdbf86f36
+FROM ghcr.io/angelnu/ubuntu-novnc:24.04@sha256:f9b6e3a3ffbd50f655d447ee7868290362062aa561b1bcb57d0edd0bdbf86f36
 ARG VERSION
 ARG APP_UID=33
 ARG APP_GID=33
 
 RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends curl jq openssh-client rsync ca-certificates tar xzip gzip bzip2 zip unzip locales locales-all \
+    apt-get install -y --no-install-recommends flatpak curl jq openssh-client rsync ca-certificates tar xzip gzip bzip2 zip unzip locales locales-all \
             libglu1-mesa libgtk-3-0 libegl1 libwebkit2gtk-4.1-0 && \
     rm -rf /var/lib/apt/lists
 
-RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/version_${VERSION}| jq -r '.assets[] | select(.browser_download_url|test("Ubuntu-24-04.AppImage$"))| .browser_download_url') \
-  && echo ${DOWNLOAD_URL} \
-  && mkdir -p /app/ \
-  && curl -sSL ${DOWNLOAD_URL} > /app/app.appimage \
-  && chmod 755 /app/app.appimage \
-  && cd /app \
-  && ./app.appimage --appimage-extract \
-  && rm app.appimage \
-  && deluser www-data \
+RUN deluser www-data \
   && groupadd --gid $APP_GID app \
   && useradd -g app --uid $APP_UID --create-home --home-dir /home/app --shell /bin/bash app \
   && mkdir -p /configs \
@@ -36,5 +28,9 @@ RUN DOWNLOAD_URL=$(curl -sX GET https://api.github.com/repos/prusa3d/PrusaSlicer
   && echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/app/.config/user-dirs.dirs \
   && echo "file:///prints prints" >> /home/app/.gtk-bookmarks  \
   && chown -R 33:33 /app /home/app /prints /configs
+
+ENV FLATPAK_GL_DRIVERS=dummy
+RUN flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+RUN flatpak install -y flathub com.prusa3d.PrusaSlicer
 
 COPY ./apps/prusaslicer-novnc/config/prusaslicer.conf /etc/supervisord.d/
