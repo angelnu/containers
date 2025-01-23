@@ -4,7 +4,7 @@ ARG CHANNEL
 ARG TARGETARCH
 ARG VERSION
 
-FROM --platform=$TARGETPLATFORM ghcr.io/angelnu/debian-novnc:12.8@sha256:2817dbf576e90b4d4dc3616ddae95aa3b8e76316cdbed726562e74169bb9b605
+FROM --platform=$TARGETPLATFORM ghcr.io/angelnu/debian-novnc:12.9@sha256:2c8e242ce99470fa896e8c191acedebfcd6c006e2bc965a270df4df370db3c67
 ARG VERSION
 ARG APP_UID=33
 ARG APP_GID=33
