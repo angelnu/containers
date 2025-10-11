@@ -4,7 +4,7 @@ ARG CHANNEL
 ARG TARGETARCH
 ARG VERSION
 
-FROM ghcr.io/angelnu/ubuntu-novnc:24.04@sha256:dfa6630ae4a6182a9ffcb5c8075881636bac8bfaf7235e40e123e98b743edcbf
+FROM ghcr.io/angelnu/ubuntu-novnc:24.04@sha256:d2f33f0a6738d0e9dd04cd49cc566a958faeb6e155e49d9671e0835efaf7359f
 ARG VERSION
 ARG APP_UID=33
 ARG APP_GID=33
