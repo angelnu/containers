@@ -30,7 +30,7 @@ RUN \
     ca-certificates \
     ${EXTRA_INSTALL_ARG} \
   && git config --global --add safe.directory /app \
-  && git clone https://git.tt-rss.org/fox/tt-rss.git . \
+  && git clone https://github.com/tt-rss/tt-rss.git . \
   && if [ -n "$VERSION" ]; then \
     NUMBER_COMMITS_TO_REVERT=$(( $(git rev-list --count --first-parent HEAD) - $(echo $VERSION|cut -d "." -f3) )); \
     git checkout "master~$NUMBER_COMMITS_TO_REVERT"; \
