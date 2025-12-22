@@ -33,7 +33,7 @@ RUN \
   && git clone https://github.com/tt-rss/tt-rss.git . \
   && if [ -n "$VERSION" ]; then \
     NUMBER_COMMITS_TO_REVERT=$(( $(git rev-list --count --first-parent HEAD) - $(echo $VERSION|cut -d "." -f3) )); \
-    git checkout "master~$NUMBER_COMMITS_TO_REVERT"; \
+    git checkout "main~$NUMBER_COMMITS_TO_REVERT"; \
   fi \
   && git clone https://github.com/tt-rss/tt-rss-plugin-nginx-xaccel.git plugins.local/nginx_xaccel \
   && git clone -b $VERSION_LDAP_AUTH https://github.com/angelnu/TTRSS-Auth-LDAP.git plugins.local/auth_ldap \
