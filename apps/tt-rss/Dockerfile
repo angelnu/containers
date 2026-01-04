@@ -20,26 +20,15 @@ RUN \
   && apt-get -qq update \
   && \
   apt-get -qq install -y \
-    php-fpm \
-    php-pdo php-gd php-pgsql php-pgsql php-mbstring \
-	  php-intl php-xml php-curl php-ldap \
-	  php-dom php-fileinfo php-json php-iconv \
-	  php-zip \
-	  postgresql-client sudo php-xdebug \
-    nginx \
-    ca-certificates \
-    ${EXTRA_INSTALL_ARG} \
-  && git config --global --add safe.directory /app \
-  && git clone https://github.com/tt-rss/tt-rss.git . \
-  && if [ -n "$VERSION" ]; then \
-    NUMBER_COMMITS_TO_REVERT=$(( $(git rev-list --count --first-parent HEAD) - $(echo $VERSION|cut -d "." -f3) )); \
-    git checkout "main~$NUMBER_COMMITS_TO_REVERT"; \
-  fi \
-  && git clone https://github.com/tt-rss/tt-rss-plugin-nginx-xaccel.git plugins.local/nginx_xaccel \
-  && git clone -b $VERSION_LDAP_AUTH https://github.com/angelnu/TTRSS-Auth-LDAP.git plugins.local/auth_ldap \
-  && git clone https://github.com/HenryQW/mercury_fulltext.git plugins.local/mercury_fulltext \
-  && chown -R www-data:www-data . .git cache feed-icons lock \
-  && cp -a config.php-dist config.php \
+  php-fpm \
+  php-pdo php-gd php-pgsql php-pgsql php-mbstring \
+  php-intl php-xml php-curl php-ldap \
+  php-dom php-fileinfo php-json php-iconv \
+  php-zip \
+  postgresql-client sudo php-xdebug \
+  nginx \
+  ca-certificates \
+  ${EXTRA_INSTALL_ARG} \
   && sed -i.bak 's/\(memory_limit =\) 128M/\1 256M/' /etc/php/*/fpm/php.ini \
   && sed -i.bak -e 's/;clear_env = .*/clear_env = no/i' -e 's/php8.1-fpm.sock/php-fpm.sock/i' /etc/php/*/fpm/pool.d/www.conf \
   && echo apt-get remove -y ${EXTRA_INSTALL_ARG} \
@@ -48,9 +37,22 @@ RUN \
   && apt-get clean \
   && \
   rm -rf \
-    /tmp/* \
-    /var/lib/apt/lists/* \
-    /var/tmp/
+  /tmp/* \
+  /var/lib/apt/lists/* \
+  /var/tmp/
+
+RUN \
+  git config --global --add safe.directory /app \
+  && git clone https://github.com/tt-rss/tt-rss.git . \
+  && if [ -n "$VERSION" ]; then \
+  NUMBER_COMMITS_TO_REVERT=$(( $(git rev-list --count --first-parent HEAD) - $(echo $VERSION|cut -d "." -f3) )); \
+  git checkout "main~$NUMBER_COMMITS_TO_REVERT"; \
+  fi \
+  && git clone https://github.com/tt-rss/tt-rss-plugin-nginx-xaccel.git plugins.local/nginx_xaccel \
+  && git clone -b $VERSION_LDAP_AUTH https://github.com/angelnu/TTRSS-Auth-LDAP.git plugins.local/auth_ldap \
+  && git clone https://github.com/HenryQW/mercury_fulltext.git plugins.local/mercury_fulltext \
+  && chown -R www-data:www-data . .git cache feed-icons lock \
+  && cp -a config.php-dist config.php
 
 #USER kah
 #nginx and php use www-data as non-privileged user
