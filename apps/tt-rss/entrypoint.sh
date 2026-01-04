@@ -18,6 +18,12 @@ if ! $PSQL -c 'select * from ttrss_version'; then
 	$PSQL < /app/schema/ttrss_schema_pgsql.sql
 fi
 
+# Logs to stdout and stderr
+cat > /etc/php/*/conf.d/50_log_stdout.ini <<EOF
+error_log = /dev/stderr
+access.log = /dev/stdout
+EOF
+
 # PHP in debug mode
 if [ ! -z "${TTRSS_XDEBUG_ENABLED}" ]; then
 	if [ -z "${TTRSS_XDEBUG_HOST}" ]; then
