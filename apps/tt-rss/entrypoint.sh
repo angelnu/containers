@@ -19,8 +19,8 @@ if ! $PSQL -c 'select * from ttrss_version'; then
 fi
 
 # Logs to stdout and stderr
-cd /etc/php/*/conf.d/
-cat > 50_log_stdout.ini <<EOF1
+cd /etc/php/*/fpm
+cat > conf.d/50_log_stdout.ini <<EOF1
 error_log = /dev/stderr
 access.log = /dev/stdout
 EOF1
@@ -32,7 +32,7 @@ if [ ! -z "${TTRSS_XDEBUG_ENABLED}" ]; then
 	fi
 	echo enabling xdebug with the following parameters:
 	env | grep TTRSS_XDEBUG
-	cat > 50_xdebug.ini <<EOF2
+	cat > conf.d/50_xdebug.ini <<EOF2
 zend_extension=xdebug.so
 xdebug.mode=develop,trace,debug
 xdebug.start_with_request = yes
