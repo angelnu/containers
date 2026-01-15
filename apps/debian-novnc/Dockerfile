@@ -6,7 +6,7 @@ ARG TARGETARCH
 ARG VERSION
 
 # Get and install Easy noVNC.
-FROM --platform=$BUILDPLATFORM docker.io/golang:1.25.5 AS easy-novnc-build
+FROM --platform=$BUILDPLATFORM docker.io/golang:1.25.6 AS easy-novnc-build
 ARG TARGETARCH
 
 # renovate: datasource=github-releases depName=geek1011/easy-novnc
