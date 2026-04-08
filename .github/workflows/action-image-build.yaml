@@ -110,7 +110,7 @@ jobs:
           # renovate: datasource=github-releases depName=aelsabbahy/goss
           version: 0.4.9
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Validate image metadata
         shell: bash
