@@ -51,7 +51,7 @@ RUN \
   && git clone https://github.com/tt-rss/tt-rss-plugin-nginx-xaccel.git plugins.local/nginx_xaccel \
   && git clone -b $VERSION_LDAP_AUTH https://github.com/angelnu/TTRSS-Auth-LDAP.git plugins.local/auth_ldap \
   && git clone https://github.com/HenryQW/mercury_fulltext.git plugins.local/mercury_fulltext \
-  && chown -R www-data:www-data . .git cache feed-icons lock \
+  && chown -R www-data:www-data . .git cache lock \
   && cp -a config.php-dist config.php
 
 #USER kah
