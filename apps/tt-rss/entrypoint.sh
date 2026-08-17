@@ -18,6 +18,13 @@ if ! $PSQL -c 'select * from ttrss_version'; then
 	$PSQL < /app/schema/ttrss_schema_pgsql.sql
 fi
 
+# Logs to stdout and stderr
+cd /etc/php/*/fpm
+cat > conf.d/50_log_stdout.ini <<EOF1
+error_log = /dev/stderr
+access.log = /dev/stdout
+EOF1
+
 # PHP in debug mode
 if [ ! -z "${TTRSS_XDEBUG_ENABLED}" ]; then
 	if [ -z "${TTRSS_XDEBUG_HOST}" ]; then
@@ -25,14 +32,15 @@ if [ ! -z "${TTRSS_XDEBUG_ENABLED}" ]; then
 	fi
 	echo enabling xdebug with the following parameters:
 	env | grep TTRSS_XDEBUG
-	cat > /etc/php/*/conf.d/50_xdebug.ini <<EOF
+	cat > conf.d/50_xdebug.ini <<EOF2
 zend_extension=xdebug.so
 xdebug.mode=develop,trace,debug
 xdebug.start_with_request = yes
 xdebug.client_port = ${TTRSS_XDEBUG_PORT}
 xdebug.client_host = ${TTRSS_XDEBUG_HOST}
-EOF
+EOF2
 fi
+cd -
 
 echo "Updating schema"
 sudo -E -u www-data php /app/update.php --update-schema=force-yes

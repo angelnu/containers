@@ -13,12 +13,12 @@ on:
 jobs:
   get-changes:
     name: Collect changes
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       addedOrModifiedImages: ${{ steps.collect-changes.outputs.addedOrModifiedImages }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Collect changes
         id: collect-changes
@@ -26,7 +26,7 @@ jobs:
 
   generate-build-matrix:
     name: Generate matrix for building images
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - get-changes
     outputs:
@@ -37,7 +37,7 @@ jobs:
         run: sudo apt-get install moreutils jo
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
