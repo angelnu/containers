@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM docker.io/alpine:3.24.2
+FROM --platform=$BUILDPLATFORM docker.io/alpine:3.24.3
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
